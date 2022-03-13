@@ -116,7 +116,11 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     if os.getenv("DATABASE_URL", None) is None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.path.join(BASE_DIR, "db.postgresql"),
+           # dj_database_url.parse(os.environ.get("DATABASE_URL")),
+        }
     }
 
 
